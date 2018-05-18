@@ -439,4 +439,4 @@ date: 2018-05-18
   - <a href="https://hello-houdini.herokuapp.com/" target="_blank">Hello Houdini</a>
 
 [slide style="background-image: url('/img/bg13.jpg')"  data-transition="cover-circle"]
-# Thank you, Thank noteppt
+# Thank you, Thank nodeppt
