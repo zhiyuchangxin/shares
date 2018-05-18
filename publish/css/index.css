@@ -1,0 +1,78 @@
+.file-setting {
+  color: yellow;
+}
+
+#incallback, #outcallback {
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-default {
+  background: #fff;
+  color: #000;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn.disabled {
+  color: #a9a9a9;
+}
+
+.lm-rool {
+  position: absolute;
+  right: 0;
+  bottom: 85px;
+  width: 140px;
+  border: 20px solid #fff;
+  border-radius: 50%;
+}
+
+.pic-note {
+  font-size: 16px;
+}
+
+.pic-note img {
+  display: block;
+  margin: 15px auto;
+  width: 80%;
+}
+
+.pic-note img.first {
+  width: 48%;
+}
+
+.pic-note p {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.qb-icon {
+  position: absolute;
+  right: 220px;
+  bottom: 60px;
+  width: 160px;
+}
+
+.question-icon {
+  display: block;
+  margin: 20px auto;
+  width: 40%;
+}
+
+.houdini-welcome {
+  margin: 40px auto 0;
+  width: 40%;
+  font-family: cursive;
+  font-size: 32px;
+  font-weight: 600;
+  color: #f00;
+  animation: pound 1s infinite;
+}
+
+@keyframes pound {
+  50% {
+    transform: scale(1.2);
+  }
+}

@@ -8,10 +8,6 @@
 /.idea
 /.vscode
 
-### output ###
-/output
-/publish
-
 ### others ###
 /.DS_Store
 /test
