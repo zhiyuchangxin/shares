@@ -1,0 +1,313 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 2018-11-09
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>你的 Stacking Context - By zhiyuchangxin</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h1>你的 Stacking Context</h1>
+
+</hgroup><article>
+
+<p><br/>
+<img src="./img/high.png" class="index-img">
+@织语长心&nbsp;&nbsp;2018-11-09</p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>知识点（<strong><em>7</em></strong>）</h2>
+
+</hgroup><article>
+
+<!-- <img src="./img/module.png" class="seven-module"> {:&.fadeIn} -->
+<ul class="moveIn">
+<li>层叠界的术语</li>
+<li>层叠准则</li>
+<li>层叠上下文的特性</li>
+<li>层叠上下文的创建 <strong><em>✔️</em></strong></li>
+<li>层叠顺序 <strong><em>✔️</em></strong></li>
+<li>控制层叠顺序</li>
+<li>代码中的层叠应用</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠界的术语</span></p>
+<h2>一、层叠界的术语</h2>
+
+</hgroup><article>
+
+<ol class="moveIn">
+<li><strong>z轴</strong>：眼睛垂直于屏幕的一条虚拟的轴线</li>
+<li><strong>层叠上下文(Stacking Context)</strong>：表示元素在z轴上的层叠水平.(html 的三维概念)</li>
+<li><strong>层叠顺序(Stacking Order)</strong>：表示同一层叠上下文中的元素在z轴上的显示顺序</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠准则</span></p>
+<h2>二、层叠准则</h2>
+
+</hgroup><article>
+
+<p class="flexbox vleft moveIn"><span>前提条件：同一层叠上下文中： <span></p>
+<ul class="flexbox vleft moveIn">
+<li><strong>谁大谁上</strong>：非同一层叠水平时，水平高的在上面</li>
+<li><strong>后来居上</strong>：同一层叠水平时，后出现的在上面</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠上下文的特性</span></p>
+<h2>三、层叠上下文的特性</h2>
+
+</hgroup><article>
+
+<ol class="moveIn">
+<li><strong><em>层叠上下文</em></strong>的层叠水平要比<strong><em>普通元素</em></strong>高</li>
+<li>层叠上下文可以<strong><em>嵌套</em></strong>：内部层叠上下文及其所有子元素均受制于外部的层叠上下文</li>
+<li>每个层叠上下文和兄弟元素<strong><em>独立</em></strong>：当进行层叠变化或渲染的时候，只需考虑后代元素</li>
+<li>每个层叠上下文<strong><em>自成体系</em></strong>：当元素发生层叠的时候，整个元素被认为在<strong>父层叠上下文的层叠顺序中</strong></li>
+<li>层叠上下文可以<strong><em>阻断</em></strong>元素的混合模式</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠上下文的创建</span></p>
+<h2>四、层叠上下文的创建</h2>
+
+</hgroup><article>
+
+<ol class="moveIn">
+<li><strong>天生派(根元素)</strong>：页面的根元素<code>&lt;html&gt;</code>天生具有层叠上下文</li>
+<li><strong>正统派(传统)</strong>：z-index为<strong>数值</strong>的<strong>定位元素</strong>（除 IE6、7 外）<ul class="fadeIn">
+<li>z-index: auto 在 IE6、7 上也会创建层叠上下文</li>
+</ul>
+</li>
+<li><strong>扩招派(新秀)</strong>：<strong>CSS3</strong> 属性产生的层叠上下文</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠上下文的创建</span></p>
+<h2>正统派层叠上下文创建</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li><strong><em>position: relative/absolute</em></strong>定位：<ul class="fadeIn">
+<li>z-index: !auto 创建</li>
+</ul>
+</li>
+<li><strong><em>position: fixed</em></strong>定位：<ul class="fadeIn">
+<li>z-index: !auto 创建「非 chrome 等 Webkit 内核浏览器」<a href="https://codepen.io/zhiyuchangxin/pen/vQGZVj" target="_blank">DEMO:(oldCreate1)</a></li>
+<li>直接创建「chrome 等 Webkit 内核浏览器」<a href="https://codepen.io/zhiyuchangxin/pen/LXNLRb" target="_blank">DEMO:(oldCreate2)</a></li>
+<li>以上两种情况导致其内部创建的层叠上下文总受外层影响！！!</li>
+</ul>
+</li>
+<li><strong><em>position: sticky</em></strong>定位时 ？？？</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠上下文的创建</span></p>
+<h2>扩招派层叠上下文创建</h2>
+
+</hgroup><article>
+
+<pre><code>1. display:flex|inline-flex 弹性布局：z-index != auto 创建
+2. 元素的 opacity: !1
+3. 元素的 transform: !none
+4. 元素的 filter: !none
+5. 元素的 mix-blend-mode: !normal // 元素和白色背景混合，IE 不支持
+6. 元素的 isolation: isolate // 阻隔混合模式
+7. 元素的 will-change 属性值为 transform... // 增强页面渲染性能
+8. 元素的 -webkit-overflow-scrolling: touch
+</code></pre><p><br/>
+<a href="https://codepen.io/zhiyuchangxin/pen/YRqxXO" target="_blank">DEMO:(newCreate)</a></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠顺序</span></p>
+<h2>五、层叠顺序（Stacking Order）</h2>
+
+</hgroup><article>
+
+<p><p style="margin-bottom:10px;font-size:20px;font-weight:600;">
+一旦普通元素具有了层叠上下文，其层叠顺序就会变高，具体定位具体分析：
+</p>
+<img src="./img/stacking-order.png" class="indstacking-order">
+<a href="https://codepen.io/zhiyuchangxin/pen/RqarRv" target="_blank"style="position: absolute;right:-200px;bottom:28px;text-align:left;">DEMO:<br/>(StackingOrder)</a></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;层叠顺序</span></p>
+<h3>思考</h3>
+
+</hgroup><article>
+
+<img src="./img/question.png" class="sc-question">
+<ol>
+<li>为什么内联元素的层叠顺序比浮动元素和块状元素高</li>
+<li>为什么定位元素会在普通元素之上展示</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><aside class="note">
+<section>
+<p>translateZ 注意:</p>
+<ol>
+<li>祖先元素需要设置 transform-style: preserve-3d</li>
+<li>translateZ 属于 GPU hack 属性， 可以使用 GPU 加速；耗电！！！</li>
+<li>非 body 的祖先级元素添加 overflow: hidden 后会使其失去优越高，恢复到 z-index: auto/0 的水平</li>
+</ol>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;改变层叠顺序</span></p>
+<h2>六、改变层叠顺序</h2>
+
+</hgroup><article>
+
+<ol class="moveIn">
+<li><strong><em>不产生</em></strong>层叠上下文的前提下：<ul class="fadeIn">
+<li>调整<strong>DOM</strong>结构（后来居上准则）</li>
+<li>添加<strong>非z-index</strong>相关的属性（block、float、inline、inline-block、定位...）</li>
+</ul>
+</li>
+<li><strong><em>产生</em></strong>层叠上下文的前提下：<ul class="fadeIn">
+<li><strong>z-index</strong>问鼎天下</li>
+<li><strong>translateZ</strong>逐鹿中原</li>
+<li><strong>z-index</strong>与<strong>translateZ</strong>冲突：双剑合璧？？？</li>
+</ul>
+</li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;改变层叠顺序</span></p>
+<h2>七、代码中的应用</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>z-index 负值深入<ul class="fadeIn">
+<li>z-index 负值渲染的过程：实际是一个寻找第一个层叠上下文元素的过程（永远逃不脱的结界）</li>
+<li>（1）实现可访问性隐藏<a href="https://codepen.io/zhiyuchangxin/pen/RqarRv" target="_blank">DEMO:(StackingOrder)</a></li>
+<li>（2）实现定位在元素的后面<a href="https://codepen.io/zhiyuchangxin/pen/wQGrgd" target="_blank">DEMO:(MinusZindex)</a></li>
+</ul>
+</li>
+<li>非浮动元素：z-index “不犯2”准则</li>
+<li>浮层元素：z-index “层级计数器”<ul class="fadeIn">
+<li>获取 z-index 最大值 / z-index 默认值（习惯设置为9）</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>参考文献</h2>
+
+</hgroup><article>
+
+<ul>
+<li><a href="https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/" target="_blank">深入理解CSS中的层叠上下文和层叠顺序</a></li>
+<li>&nbsp;张鑫旭新出的书：《CSS 世界》</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg13.png')"  data-transition="cover-circle"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Thank you</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide2',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<link rel="stylesheet" href="./css/index.css">
+
+<!--placeholder-->
+</body>
+</html>

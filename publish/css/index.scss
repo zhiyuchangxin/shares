@@ -1,3 +1,23 @@
+body {
+  font-family: cursive;
+}
+
+.slide.fill img {
+  left: auto;
+  top: auto;
+  min-width: auto;
+  min-height: auto;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.zy-ml30 {
+  margin-left: 400px;
+}
+
 .file-setting{
   color: yellow;
 }
@@ -67,3 +87,113 @@
   }
 }
 
+// sevenHabit
+.slide.fill img.seven-module {
+  position: absolute;
+  left: 0;
+  top: 160px;
+  width: 400px;
+  border: 5px solid #fff;
+  border-radius: 50%;
+  z-index: 1;
+}
+.slide.fill img.woman {
+  position: relative;
+  display: inline-block;
+  width: 260px;
+  z-index: 1;
+  &.blur {
+    -webkit-filter: blur(15px);
+       -moz-filter: blur(15px);
+        -ms-filter: blur(15px);    
+            filter: blur(15px);  
+  }
+}
+.slide.fill img.customize-pic {
+  position: relative;
+  width: 300px;
+  z-index: 1;
+}
+.slide.fill img.jjzd {
+  margin: 10px 0;
+  width: 600px;
+}
+.slide.fill img.focus {
+  margin: 20px 0;
+  display: inline-block;
+  width: 230px;
+  height: 220px;
+  z-index: 1;
+}
+.slide.fill img.lf:not(:first-child) {
+  margin: 20px 0;
+  display: inline-block;
+  width: 300px;
+  height: 200px;
+  z-index: 1;
+}
+.slide.fill img.lf:first-child {
+  margin: 20px 0;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+}
+.slide.fill img.mt20 {
+  margin-top: 20px;
+}
+.slide.fill img.zs {
+  position: absolute;
+  right: 0;
+  bottom: 80px;
+  width: 300px;
+  z-index: 1;
+}
+.slide.fill img.think {
+  position: absolute;
+  right: -150px;
+  top: 200px;
+  width: 220px;
+}
+.slide.fill img.think1 {
+  position: absolute;
+  left: 300px;
+  top: 0;
+  width: 220px;
+}
+
+// stacking context
+.slide.fill {
+  background-size: 100% 100%;
+}
+.slide.fill img.index-img {
+  display: block;
+  position: relative;
+  margin: -50px auto 50px;
+  width: 70%;
+  border: 0 none;
+}
+.slide.fill img.indstacking-order {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  height: auto;
+  border: 0 none;
+  z-index: 1;
+}
+.slide.fill img.sc-question {
+  position: absolute;
+  right: 20px;
+  bottom: 80px;
+  width: 18%;
+  transform: rotate(13deg);
+}
+.theme-tag {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  opacity: .5;
+  font-size: 34px;
+  font-family: serif;
+}

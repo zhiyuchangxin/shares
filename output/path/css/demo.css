@@ -1,0 +1,40 @@
+.file-setting{
+  color: yellow;
+}
+#incallback,#outcallback{
+  margin-top:10px;
+  background-color: rgba(0,0,0,.5);
+}
+.btn-default {
+  background: #fff;
+  color: #000;
+}
+.btn {
+  cursor: pointer;
+}
+.btn.disabled {
+  color: #a9a9a9;
+}
+
+
+.lm-rool {
+  position: absolute;
+  right: 0;
+  bottom: 85px;
+  width: 140px;
+  border-radius: 35%;
+}
+.pic-note {
+  text-align: center;
+  font-size: 16px;
+}
+.pic-note img {
+  display: block;
+  width: 60%;
+  margin: 5px auto;
+}
+.pic-note img.first {
+  
+}
+
+
