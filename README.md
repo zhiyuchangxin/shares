@@ -13,4 +13,6 @@ nodeppt start -p <port> -d `target_dir`
 ### 导出ppt
 ```bash
 nodeppt generate path output/path -a
+
+# nodeppt generate ./ppts -a
 ```

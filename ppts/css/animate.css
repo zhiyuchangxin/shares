@@ -1,0 +1,65 @@
+body {
+  font-family: cursive;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.mt20 {
+  margin-top: 20px !important;
+}
+
+#incallback, #outcallback {
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-default {
+  background: #fff;
+  color: #000;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn.disabled {
+  color: #a9a9a9;
+}
+
+/* .slide.fill {
+  background-size: 100% 100%;
+} */
+.slide.fill img {
+  left: auto;
+  top: auto;
+  min-width: auto;
+  min-height: auto;
+}
+.slide.fill img.index-img {
+  display: block;
+  position: relative;
+  margin: -50px auto 50px;
+  width: 70%;
+  border: 0 none;
+}
+.slide.fill img.content-img {
+  display: block;
+  position: relative;
+  margin: 10px auto;
+  width: 100%;
+  z-index: 1;
+}
+.theme-tag {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  opacity: .5;
+  font-size: 34px;
+  font-family: serif;
+}

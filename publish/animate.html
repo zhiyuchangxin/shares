@@ -1,0 +1,572 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 2019-04-26
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>关于动画的九件小事 - By zhiyuchangxin</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.moon.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide fill" style="background-image: url('./img/bg1.jpg')"><section class="slide-wrapper"><hgroup>
+<h1>关于动画的九件小事</h1>
+
+</hgroup><article>
+
+<p><br/>
+<!-- <img src="./img/high.png" class="index-img"> -->
+@织语长心&nbsp;&nbsp;2019-04-26</p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>第五届 CSS 大会</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>回顾：<a href="https://www.yuque.com/cssconf/5th" target="_blank">https://www.yuque.com/cssconf/5th</a></li>
+<li>特别想说：<span><strong>**</strong></span></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>特别想说“自动 margin”</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>垂直居中实现？那么原理呢？</li>
+<li>我对 margin 的理解：<a href="https://blog.zhiyuchangxin.cn/articles/margin/index.html" target="_blank">https://blog.zhiyuchangxin.cn/articles/margin/index.html</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>我能想到的动画实现方式（<strong><em>12</em></strong>）</h2>
+
+</hgroup><article>
+
+<div style="padding-left: 150px; padding-top: 30px; text-align: left; text-shadow:1px 2px 0px #152E4F, 3px 5px 0px rgba(0,0,0,0.2);">
+  <p>1. Css Feather （✔️）</p>
+  <p>2. Css Transition （✔️）</p>
+  <p>3. Css Animation （✔️）</p>
+  <p>4. Js Animation</p>
+  <p>5. Jq Animate </p>
+  <p>6. 动画库</p>
+  <p style="font-weight: 900;color: #16D5B5;">7. Web Animation （✔️）</p>
+  <p>8. Vue Transition</p>
+  <p style="opacity: 0.4;">9. Gif 图算吗</p>
+  <p style="opacity: 0.4;">
+    10. Canvas
+    <!-- <img src="./img/.png"> -->
+  </p>
+  <p style="opacity: 0.4;">11. Svg</p>
+  <p style="opacity: 0.4;">12. Webgl</p>
+</div>
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Feather</span></p>
+<h2>一、Css Feather（？）</h2>
+
+</hgroup><article>
+
+<blockquote class="moveIn">
+<p>“属性动画”名称是我杜撰的，我说是动画大家将就听一听吧~ </p>
+</blockquote>
+<div style="padding-left: 120px;padding-top: 30px; text-align: left;">
+  <p>Feather One：****</p>
+  <p>Feather Two：****</p>
+  <p>Feather Three：****</p>
+</div>
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Feather</span></p>
+<h2>Feather One: <code>Sticky</code> 粘性定位</h2>
+
+</hgroup><article>
+
+<ul class="fadeIn">
+<li>粘性定位可以被认为是相对定位 relative 和固定定位 fixed 的混合</li>
+<li>必须指定 top right bottom left 四个阈值之一，粘性定位才会生效</li>
+<li>元素在跨越阈值前为相对定位，之后为固定定位</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><article>
+<h2><span class="theme-tag">&middot;Css Feather</span></h2>
+<ul class="moveIn">
+<li><a href="https://caniuse.com/#search=sticky" target="_blank">兼容性</a><img src="./img/sticky-compatibility.png" class="content-img"></li>
+<li>适用场景：<ul class="fadeIn">
+<li>通讯录定位<a href="https://codepen.io/pen/?&editable=true" target="_blank">(MDN DEMO)</a></li>
+<li>Tab滚动吸顶<a href="https://juejin.im/post/5caa0c2d51882543fa41e478?utm_source=gold_browser_extension#comment" target="_blank">推荐文章：5 种滚动吸顶实现方式的比较[性能升级版]</a></li>
+</ul>
+</li>
+<li><strong>Tip</strong>: sticky 在 IOS 系统上兼容良好，但在安卓上暂时还是不要使用了</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Feather</span></p>
+<h2>Feather Two: <code>scroll-snap</code> 滚动捕捉</h2>
+
+</hgroup><article>
+
+<ul class="fadeIn">
+<li>scroll Snap 可以让网页容器滚动停止时自动平滑定位到元素的指定位置（类似幻灯片广告）</li>
+<li>常用属性（2个就够了）<pre><code class="css">/* 父容器最重要的属性 */
+scroll-snap-type: none | [ x|y|block|inline|both ] [ mandatory|proximity ]
+/* 子元素最重要的属性 */
+scroll-snap-align: [none | start | center | end]{1,2}
+</code></pre>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><article>
+<h2><span class="theme-tag">&middot;Css Feather</span></h2>
+<ul class="moveIn">
+<li><a href="https://caniuse.com/#search=scroll-snap" target="_blank">兼容性</a><img src="./img/snap-compatibility.png" class="content-img"></li>
+<li>适用场景： <a href="https://codepen.io/airen/full/VRgevr" target="_blank">换装DEMO</a><a href="javascript:void(0);" target="_blank">幻灯片DEMO</a></li>
+<li><strong>Tip</strong>: 兼容性良好，但是缺少动画结束回调，功能不够完善。</li>
+<li><strong>小事一</strong>： 可以用 scroll-snap 捕捉滚动实现简单轮播效果</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Feather</span></p>
+<h2>Feather Three: <code>resize</code></h2>
+
+</hgroup><article>
+
+<pre><code class="css">overflow: !visible
+resize: none | horizontal | vertical | both ...
+</code></pre>
+<ul>
+<li>常用：禁止 Textarea 拉动</li>
+<li>Amazing: <a href="javascript:void(0);" target="_blank">实现两栏拖动(配合滚动条样式)</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Transition</span></p>
+<h2>二、Css Transition</h2>
+
+</hgroup><article>
+
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><aside class="note">
+<section>
+<p><img src="./img/transition-process.png" class="content-img"></p>
+<p style="margin: 20px 0; text-align: center; font-size: 30px; color: #f00;">Js 在 painting 之后才执行</p>
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Transition</span></p>
+<h2><strong>小事二</strong>：Transition 仅在样式发生变化时才会运行</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>伪元素之间的切换<code>:hover</code>、<code>:active</code> <a href="javascript:void(0);" target="_blank">（StarDemo）</a></li>
+<li>Js 实现的状态变化<!-- - transition 可以被取消 --></li>
+<li><strong>Tip1</strong>：Js 创建 DOM 并直接设置过渡，是监测不到样式变化的<mark>Note</mark><ul class="fadeIn">
+<li>执行两次 requestAnimationFrame() 向后两帧计算出样式的变化</li>
+<li>getComputedStyle(el)[property] 计算出样式变化</li>
+</ul>
+</li>
+<li><strong>Tip2</strong>：元素被移除、<code>display:none</code> 同样监测不到样式变化</li>
+<li><strong>Tip3</strong>：<code>transition-timing-function</code> 默认值为 <code>ease</code></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Animation</span></p>
+<h2>三、Css Animation</h2>
+
+</hgroup><article>
+
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><aside class="note">
+<section>
+<p><img src="./img/transition-process.png" class="content-img"></p>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Animation</span></p>
+<h2>Css Animation 相关 DEMO</h2>
+
+</hgroup><article>
+
+<ul>
+<li><a href="javascript:void(0);" target="_blank">遮罩层DEMO</a><ul>
+<li>主要在扇形的实现上，动画作为辅助效果</li>
+</ul>
+</li>
+<li><a href="javascript:void(0);" target="_blank">色带流动DEMO</a><ul>
+<li>传统的思路：制作背景图移动背景图位置</li>
+<li>新思路：之间动画改编色相饱和度属性</li>
+</ul>
+</li>
+<li><a href="javascript:void(0);" target="_blank">小球DEMO</a><ul>
+<li><strong>小事三</strong>：animation-timing-function 只在关键帧之间适用</li>
+</ul>
+</li>
+<li><a href="javascript:void(0);" target="_blank">倒计时DEMO</a><ul>
+<li><strong>小事四</strong>：animation-timing-function 默认值 ease，自动补间动画</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Css Animation</span></p>
+<h2>等等，还有一个 BUG</h2>
+
+</hgroup><article>
+
+<div style="display:inline-block; width: 28%; vertical-align: middle;">
+  <img src="./img/bug-cut.png" class="content-img">
+</div><div style="margin-left: 50px; display:inline-block; width: 38%; vertical-align: middle;">
+  <img src="./img/after-rem.png" class="content-img">
+  <img src="./img/after-keyframe.png" class="content-img">
+</div><p>特殊的缘分：同时使用<strong>伪元素</strong>+<strong>animation中含rem单位</strong>+<strong>小米4.4手机</strong>，
+CSS 导致 app 崩溃了</p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><article>
+<h2><span class="theme-tag">&middot;Css Animation</span></h2>
+<div style="display:inline-block; margin-right: 50px; width: 50%; vertical-align: middle;">
+  <img src="./img/el-rem.png" class="content-img">
+</div><div style="display:inline-block; text-align: left; vertical-align: middle; font-weight: 900;">
+  <p>解决方案：</p>
+  <p>1. 不使用 rem</p>
+  <p>2. 不使用 animation</p>
+  <p>3. 不使用 伪元素 （✔️）</p>
+</div><p><p style="position: absolute; right: -200px; bottom: 0; font-size: 18px; opacity: .6;">
+  相同的遭遇：
+  <a href="http://www.uml.org.cn/html/2017020705.asp" target="_blank">原来CSS这样写是会让app崩溃的</a>
+</p>
+<br></p>
+<ul class="fadeIn">
+<li><strong>小事五</strong>：避免将动画作用于使用了 rem 的伪元素上</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Js Animation</span></p>
+<h2>四、Js Animation</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li><a href="https://v5-ui.58corp.com/demo/#/" target="_blank">DEMO：V5 组件库</a>中的按钮动画<ul class="fadeIn">
+<li>通过对 rippleJS 的改写，实现了水波纹动效按钮</li>
+<li><a href="https://github.com/samthor/rippleJS" target="_blank">读一读 rippleJS 源码</a></li>
+<li>其他实现思路？<a href="javascript:void(0);" target="_blank">自定义属性实现</a></li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;动画库</span></p>
+<h2>五、动画库</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li><a href="https://blog.fundebug.com/2019/01/11/10-javascript-animation-library-in-2019/" target="_blank">2019年10个最受欢迎的JavaScript动画库！</a></li>
+<li><a href="http://velocityjs.org/" target="_blank">Velocity.js 官网</a><ul class="fadeIn">
+<li><a href="https://github.com/julianshapiro/velocity" target="_blank">Velocity.js 源码</a>（🤩 4000+ 行啊~）</li>
+<li>80+ 行说一下<a href="javascript:void(0);" target="_blank">原理</a></li>
+<li><a href="https://www.npmjs.com/package/velocity-vue" target="_blank">velocity-vue</a>?</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>六、Web Animation</h2>
+
+</hgroup><article>
+
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>Web Animation API（简：WAAPI）</h2>
+
+</hgroup><article>
+
+<ul>
+<li>WAAPI 将浏览器动画引擎向开发者打开，并由 Js 进行操作，将表现与行为分开</li>
+<li><a href="https://caniuse.com/#search=web" target="_blank">兼容性</a><img src="./img/web-animation-API.png" class="content-img" style="width: 80%;"><ul>
+<li>Firefox 48+ 和 Chrome 36+ 中 Web Animation API</li>
+<li>Webkit 和 Edge 已经将 API 移动到各自的待办事项列表中</li>
+<li>可以测试功能支持来添加 <a href="https://github.com/web-animations/web-animations-js" target="_blank">polyfill</a></li>
+</ul>
+</li>
+<li><strong>小事六</strong>：现在可以开始使用 Web Animation API 啦</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>如何使用 WAAPI</h2>
+
+</hgroup><article>
+
+<blockquote>
+<p>用过 jq 的 animate() 就方便多啦， WAAPI 的基本语法与之类似，<br>不同的是，WAAPI 是浏览器原生支持的，在性能上有很大的优势。</p>
+</blockquote>
+<p><br></p>
+<pre><code class="js">var element = document.querySelector(&#39;.animate-me&#39;);
+element.animate(keyframes, 1000);
+</code></pre>
+<ul class="moveIn">
+<li>DOM节点具备全新的 animate 方法</li>
+<li>animate 方法接收两个参数<ul class="fadeIn">
+<li><strong>动画模型</strong>keyframes：通常是一个对象数组，对应 CSS @keyframes 块的关键帧对象</li>
+<li><strong>时序模型</strong>options：包含动画时序参数</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>注意 WAAPI <strong>VS</strong> CSS 属性上的差异</h2>
+
+</hgroup><article>
+
+<img src="./img/web-animation-compare.png" class="content-img">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>如何使用 WAAPI</h2>
+
+</hgroup><article>
+
+<pre><code class="js">// 动画模型
+var keyframes = [
+  { opacity: 0 },
+  { opacity: 1 }
+];
+// 时序模型
+var options = {
+  iterations: Infinity, // 对应 animation-iteration-count: infinite
+  iterationStart: 0,
+  delay: 0,
+  endDelay: 0,
+  direction: &#39;alternate&#39;,
+  duration: 700,
+  fill: &#39;forwards&#39;,
+  easing: &#39;ease-out&#39;, // 对应 animation-timing-function: ease-out
+}
+element.animate(keyframes, options);
+</code></pre>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>WAAPI 的 animate 的返回值</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>animate 方法不仅仅为元素提供动画，它还有自己的返回值。<img src="./img/web-animation-obj.png" class="content-img"></li>
+<li><a href="javascript:void(0);" target="_blank">DEMO：两个小球撞击</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Web Animation</span></p>
+<h2>其他常用 WAAPI</h2>
+
+</hgroup><article>
+
+<pre><code>play()
+pause()
+reverse()
+finish() // Promise
+playbackRate // 控制动画速度（可为负值——反向）
+</code></pre><p><a href="https://web-animations.github.io/web-animations-demos/" target="_blank">DEMO（firefox上预览）</a>
+<a href="https://codepen.io/rachelnabors/full/PNGGaV" target="_blank">ALice DEMO</a></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;Vue Transition</span></p>
+<h2>七、Vue Transition</h2>
+
+</hgroup><article>
+
+<p><strong>小事七</strong>：Vue transition 中同时使用过渡和动画，可以选择性结束动画</p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;性能</span></p>
+<h2>八、性能</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>css 在实现复杂动画上有局限性，需要 js 实现控制</li>
+<li>css vs js 动画性能的好坏？<ul class="fadeIn">
+<li>前面的 demo 中 css 使用不当也会导致 app 崩溃</li>
+<li>还是看使用者的水平，避免频繁 reflow</li>
+</ul>
+</li>
+<li><strong>小事八</strong>：尽量只动画 transition 和 opacity，必要时配合 will-change</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;不要过度使用动画</span></p>
+<h2><strong>小事九</strong>：不要过度使用动画</h2>
+
+</hgroup><article>
+
+<blockquote>
+<p>这听着像设计的任务</p>
+</blockquote>
+<ul class="moveIn">
+<li>接受一些有意义的动画<ul class="fadeIn">
+<li>减少视觉上的冲突</li>
+<li>可操作交互提醒</li>
+<li>突出宣传主题</li>
+</ul>
+</li>
+<li>纯粹为了美观的动画就放弃吧</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>总结九件小事</h2>
+
+</hgroup><article>
+
+<ol class="fadeIn">
+<li><strong>可以用 scroll-snap 捕捉滚动实现简单轮播效果</strong></li>
+<li><strong>Transition 仅在样式发生变化时才会运行</strong></li>
+<li><strong>animation-timing-function 只在关键帧之间适用</strong></li>
+<li><strong>animation-timing-function 默认值 ease，自动补间动画</strong></li>
+<li><strong>避免将动画作用于使用了 rem 的伪元素上</strong></li>
+<li><strong>现在可以开始使用 Web Animation API 啦</strong></li>
+<li><strong>Vue transition 中同时使用过渡和动画，可以选择性结束动画</strong></li>
+<li><strong>尽量只动画 transition 和 opacity，必要时配合 will-change</strong></li>
+<li><strong>不要过度使用动画</strong></li>
+</ol>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg22.png')"><section class="slide-wrapper"><hgroup>
+<h2>参考文献</h2>
+
+</hgroup><article>
+
+<ul>
+<li>Brian Birtles 讲稿<a href="https://birtles.github.io/cssconf2019/index.zh.html#/title" target="_blank">10 THINGSI WISH PEOPLE KNEW ABOUT WEB ANIMATION</a></li>
+<li><a href="https://alligator.io/css/scroll-snapping/" target="_blank">Control Page Scroll in CSS Using Scroll Snapping</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API" target="_blank">Web Animations API</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API" target="_blank">Using the Web Animations API</a></li>
+<li><a href="http://www.alloyteam.com/2015/12/web-animation-api-from-entry-to-the-top/" target="_blank">Web Animation API 从入门到上座</a></li>
+<li><a href="https://css-tricks.com/css-animations-vs-web-animations-api/" target="_blank">CSS Animations vs Web Animations API</a></li>
+<li><a href="https://davidwalsh.name/css-js-animation" target="_blank">CSS vs. JS Animation: Which is Faster?</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2018/03/web-animations-api-dynamic-feature-animation/" target="_blank">借助Web Animations API实现JS keyframes动画</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/design-and-ux/animations/animations-and-performance?hl=zh-cn#css-vs-javascript-performance" target="_blank">动画与性能</a></li>
+<li><a href="https://blog.csdn.net/young_Emily/article/details/80091667" target="_blank">扇形的几种实现方式</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg1.jpg')"  data-transition="cover-circle"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Thank you</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide2',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<link rel="stylesheet" href="./css/animate.css">
+
+<!--placeholder-->
+</body>
+</html>
