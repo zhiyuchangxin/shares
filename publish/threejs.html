@@ -1,0 +1,569 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 2019-09-27
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js 初探 - By zhiyuchangxin</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>Three.js 初探</h1>
+
+</hgroup><article>
+
+<p><br/>
+@织语长心&nbsp;&nbsp;2019-09-27</p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>目录（<strong><em>6</em></strong>）</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>Three.js 介绍 </li>
+<li>Three.js 基本要素</li>
+<li>Three.js 进阶要素</li>
+<li>Three.js 生态</li>
+<li>Three.js + Vue 模板</li>
+<li>Three.js 应用</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>（一）、WebGL 介绍</p>
+<ol>
+<li>WebGL（Web Graphics Library）是一种 3D 绘图协议</li>
+<li>这种绘图技术标准允许把 JS 和 OpenGL ES2.0 结合在一起</li>
+<li>通过增加 OpenGL ES2.0 的一个 JS 绑定，<br>
+WebGL 可以为 HTML5 Canvas 提供硬件 3D 加速渲染</li>
+<li>大部分现代浏览器已经支持 WebGL（✨）<div style="font-size: 20px; color: #f00;">（可以通过 GPU 的功能在浏览器端创建好看且运行良好的三维应用）</div><br></li>
+</ol>
+<p>（二）、选择 Three.js</p>
+<ol>
+<li>直接使用 WebGL 编程复杂，需了解 WebGL 的底层细节，并且学习复杂的着色语言来获得 WebGL 的大部分功能</li>
+<li>Three.js 提供了一个简单的关于 WebGL 特性的 JS API</li>
+<li>不需要详细的学习 WebGL 就能在浏览器端创建出好看的三维图形</li>
+</ol>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<h2>一、Three.js 介绍</h2>
+
+</hgroup><article>
+
+<blockquote>
+<p>WebGL 的 JS 3D 库</p>
+</blockquote>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>二、Three.js 基本要素</h2>
+
+</hgroup><article>
+
+<img src="./img/three-base-count.png" class="index-img">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>框架原理</h2>
+
+</hgroup><article>
+
+<img src="./img/three-render.jpg" class="index-img">
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>预备概念</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>Three.js 的单位是什么？<ul class="fadeIn">
+<li>没有单位，按比例绘图</li>
+</ul>
+</li>
+<li>坐标系的位置和指向？<ul class="fadeIn">
+<li>右手坐标系</li>
+</ul>
+</li>
+</ul>
+<p class="moveIn"><span><img src="./img/three-hand.png" class="index-img" style="margin-top:10px;width:450px;"> <span></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>场景（scene）</h2>
+<h2><p style="text-align:right;font-size:22px;">——所有物体、光源、摄像机的容器</p></h2>
+<p><p style="margin:20px;text-align:left;color:#00f;">场景只有一种，用 THREE.Scene 来表示
+<pre><code class="js">const scene = new THREE.Scene() // 创建场景
+
+THREE.Scene.add() // 向场景中添加对象
+THREE.Scene.remove() // 从场景中移除对象
+THREE.Scene.children // 遍历场景中所有子对象列表（包括摄像机&amp;光源）
+THREE.Scene.traverse(function(obj){}) // 遍历场景中所有子对象并处理以传入的方法（包括摄像机&amp;光源）
+THREE.Scene.getObjectByName(name) // 获取场景中特定的命名对象
+// 雾化：
+scene.fog = new THREE.Fog(0xffffff, 开始雾化处, 结束雾化处) // 开始到结束雾化浓度线性增长
+scene.fog = new THREE.FogExp2(0xffffff, 雾化浓度) // 雾化浓度随距离指数增长
+// 材质：
+scene.overrideMaterial = new THREE.MeshLambertMaterial({color: 0xffffff}) // 使用了overrideMaterial属性后所有物体都被迫使用该材质，物体本身设置的材质无效
+</code></pre>
+
+</article></section></slide>
+<slide class="slide hasnote"><aside class="note">
+<section>
+<p>一、正交投影 vs 透视投影</p>
+<ol>
+<li>正交投影：<br>获得的结果就像我们在数学几何学课上老师教我们画的效果，对于在三维空间内平行的线，投影到二维空间中也一定是平行的</li>
+<li>透视投影：<br>获得的结果是类似人眼在真实世界中看到的有“近大远小”的效果</li>
+</ol>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>摄像机（camera）</h2>
+
+</hgroup><article>
+
+<p style="margin:20px 8px 30px;text-align:left;">常用的两种相机：<i style="color:#00f;">透视投影相机</i> vs <i style="color:#00f;">正投影相机</i></p>
+
+<pre><code class="js">// 正投影相机
+new THREE.OrthographicCamera(left, right, top, bottom, near, far) // 视景体是一个四棱台
+// 透视投影相机
+new THREE.PerspectiveCamera(fov, aspect, near, far) // 视景体是一个长方体
+</code></pre>
+<p><img src="./img/three-camera-o.png" class="index-img" style="height:280px">
+<img src="./img/three-camera-p.png" class="index-img" style="height:280px"></p>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>渲染器（renderer）</h2>
+<h2><p style="margin-bottom:30px;text-align:right;font-size:22px;">——负责选择如何渲染出图像（使用WegGL or Canvas）</p></h2>
+<pre><code class="js">const renderer = new THREE.WebGLRenderer({
+  antialias: true // 抗锯齿（true 的时候稍微有一些耗性能）
+  alpha: true, // 背景是否透明
+  precision: &#39;highp&#39;, // 着色精度选择 [highp | mediump | lowp]
+  premultipliedAlpha: false, // 是否可以设置像素深度（用来度量图像分辨率）
+  preserveDrawingBuffer: true, // 是否保存绘图缓冲
+  maxLights: 3, // 最大灯光数
+  stencil: false // 是否使用模板字体或图案
+})
+
+renderer.setSize(width, height)
+renderer.setPixelRatio(dpr)
+renderer.setClearColor(0xffffff)
+renderer.shadowMap.enabled = true
+dom.appendChild(renderer.domElement)
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>几何体</h2>
+
+</hgroup><article>
+
+<ul>
+<li>基本图形元素：点、线、面...</li>
+<li>Three.js 提供的<a href="https://threejs.org/examples/#webgl_geometries" target="_blank">几何形状</a></li>
+<li>Three.js 提供的<a href="https://threejs.org/examples/#webgl_materials" target="_blank">材质</a></li>
+<li><strong><em> 纹理 </em></strong>（3D世界的纹理由图片或贴图组成）：图片路径不能为相对路径<ul>
+<li>常用 THREE.TextureLoader() 加载纹理</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 基本要素</span></p>
+<h2>光源</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li><strong><em> AmbientLight </em></strong>：环境光<ul>
+<li>表现相同的明暗程度</li>
+<li>无法产生阴影</li>
+</ul>
+</li>
+<li><strong><em> PointLight </em></strong>：点光源</li>
+<li><strong><em> SpotLight </em></strong>：聚光灯</li>
+<li><strong><em> DirectionalLight </em></strong>：方向光 / 平行光</li>
+<li><strong><em> HemisphereLight </em></strong>：半球光<ul>
+<li>无法产生阴影</li>
+</ul>
+</li>
+<li><strong><em> RectAreaLight </em></strong>：区域光</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>三、Three.js 进阶要素</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>雾化</li>
+<li>阴影</li>
+<li>loader 3D 模型</li>
+<li>粒子化（❤️）</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 进阶要素</span></p>
+<h2>雾化</h2>
+
+</hgroup><article>
+
+<pre><code class="js">const scene = new THREE.Scene()
+scene.fog = new THREE.Fog(0xffffff, 开始雾化处, 结束雾化处) // 开始到结束雾化浓度线性增长
+scene.fog = new THREE.FogExp2(0xffffff, 雾化浓度) // 雾化浓度随距离指数增长
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 进阶要素</span></p>
+<h2>阴影</h2>
+
+</hgroup><article>
+
+<p style="margin:20px 8px 30px;text-align:left;"><i style="color:#00f;">环境光（AmbientLight）</i>、<i style="color:#00f;">半球光（HemisphereLight）</i>无法产生阴影</p>
+
+<pre><code class="js">// 1. 渲染器启用阴影
+let renderer
+function initThree() {
+    renderer.shadowMap.enabled = true // 开启渲染器的阴影功能
+    // ...
+}
+// 2. 能产生阴影的光源阴影设置
+let light
+function initLight() {
+    light.castShadow = true // 开启该灯光的阴影效果
+    // ...
+}
+// 3. 物体们阴影参数设置
+let plane
+let mesh
+function initObject() {
+    plane.receiveShadow = true // 该平面接收来自其他物体的阴影
+    mesh.castShadow = true // 该立方体可产生阴影
+    // ...
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 进阶要素</span></p>
+<h2>loader 3D 模型</h2>
+
+</hgroup><article>
+
+<ul>
+<li><a href="https://blog.csdn.net/weixin_33857230/article/details/91698283" target="_blank">三维文件格式 abc, gltf, fbx, obj, dae, stl, 3ds, ply...</a></li>
+<li>Three.js 提供了很多 loader 方便使用，外部模型推荐 <strong><em>gltf</em></strong> 格式，使用 <strong><em>GLTFLoader</em></strong> 载入</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 进阶要素</span></p>
+<h2>粒子化</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>创建方法1：<code>THREE.Sprite(material)</code><ul class="fadeIn">
+<li>粒子数量较小时，一般不会存在性能问题，可以使用 THREE.Sprite（会创建多个 THREE.Sprite 对象）</li>
+<li>一个材质可以对应多种纹理</li>
+</ul>
+</li>
+<li>创建方法2：<code>THREE.Points(geometry, material)</code><ul class="fadeIn">
+<li>粒子数量较大时，使用 THREE.Points 更为合适（只需创建一个 THREE.Points 对象即可）</li>
+<li>一个材质只能对应一种纹理</li>
+</ul>
+</li>
+<li>粒子默认形状是<strong><em>正方形</em></strong>，想改变粒子的形状，需要加载纹理<ul class="fadeIn">
+<li>加载外部图片</li>
+<li>Canvas 2D 画布</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>四、Three.js 生态(插件)</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>兼容性检测 </li>
+<li>性能检测面板</li>
+<li>可视化调参面板</li>
+<li>补间动画库</li>
+<li>轨迹球控件</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 生态</span></p>
+<h2>兼容性检测</h2>
+
+</hgroup><article>
+
+<div style="margin: 30px 10px;text-align:left;line-height:40px;">
+Detector.js插件功能很全：<br>
+1. 判断 canvas 兼容<br>
+2. 判断 webgl 兼容性<br>
+3. 在页面添加不兼容提示信息。 
+</div><pre><code class="js">// 1. 引入 Detector.js
+
+// 2. 判断兼容
+if (!Detector.webgl) {
+  Detector.addGetWebGLMessage()
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 生态</span></p>
+<h2>性能检测面板</h2>
+
+</hgroup><article>
+
+<ul>
+<li>fps（frames per econd）:视频 or 动画每秒显示的帧数</li>
+<li>3D 程序最大的帧数是显卡支持的刷新率</li>
+<li>电影以每秒 24 帧的速度播放变可满足，电视 30fps，游戏最好在 30fps 以上</li>
+</ul>
+<pre><code class="js">// 1. 引入 stats.js
+// 2. 添加性能检测
+let stats
+function initStats() {
+  stats =  new Stats()
+  stats.showPanel(0) // 0: fps, 1: ms, 2: mb, 3+: custom
+  dom.appendChild(stats.dom) // document.body.appendChild(stats.dom)
+}
+// 3. 渲染函数添加更新
+function render() {
+  stats.update()
+    // .....
+  requestAnimationFrame(render)
+}
+// 4. 函数调用
+initStats()
+render()
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 生态</span></p>
+<h2>可视化调参面板</h2>
+
+</hgroup><article>
+
+<pre><code class="js">// 1. 引入 dat.gui.js
+// 2. 添加调参面板
+let gui
+let para
+function createUI() {
+  const Parame = function() { // 待调参数构造函数
+    this.speed = 2
+  }
+  para = new Parame()
+  gui = new dat.GUI()
+  gui.add(para, &#39;speed&#39;, 1, 10).name(&#39;speed&#39;)
+}
+// 3. 渲染函数添加动效
+function render() {
+    line.position.x -= para.speed * .5
+    // ......
+    requestAnimationFrame(render)
+}
+// 4. 函数调用
+createUI()
+render()
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 生态</span></p>
+<h2>补间动画库</h2>
+
+</hgroup><article>
+
+<pre><code class="js">// 1. 引入 tween.js
+// 2. 添加补间动画
+let tween
+function initTween() {
+  tween = new TWEEN.Tween(camera.position)
+    .to({x: 100, z: 100}, 1500)
+    .easing(TWEEN.Easing.Quadratic.Out) // 默认匀速
+    .repeat(2) // 重复执行次数(Infinity无限循环)，共执行 n+1 次
+    .start()
+}
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">Three.js 生态</span></p>
+<h2>轨迹球控件</h2>
+
+</hgroup><article>
+
+<pre><code class="js">// 1. 引入 OrbitControls.js
+// 2. 添加轨迹控制
+let controls
+function initControls() {
+  controls = new THREE.OrbitControls(camera, renderer.domElement)
+  controls.enableDamping = true // 启用阻尼或自动旋转时，需要动画循环
+  controls.dampingFactor = 0.2 // 阻尼系数 越小则滑动越大
+  controls.minDistance = 50 // 最小视角
+  controls.maxDistance = 350 // 最大视角 Infinity 无穷大
+  controls.maxPolarAngle = Math.PI / 2
+  // ...
+}
+// 3. 渲染函数添更新
+function render() {
+  controls.update()
+  // ...
+  requestAnimationFrame(render)
+}
+// 4. 函数调用
+initControls()
+render()
+</code></pre>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>五、Three.js + Vue 总结模板</h2>
+
+</hgroup><article>
+
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>六、Thre.js 应用</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>全景模型 </li>
+<li>外部模型载入（可带动画）</li>
+<li>模型粒子化</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>参考文献</h2>
+
+</hgroup><article>
+
+<ul>
+<li><a href="https://threejs.org/" target="_blank">Threejs.org</a></li>
+<li><a href="https://aotu.io/notes/2017/08/28/getting-started-with-threejs/index.html" target="_blank">Threejs 现学现卖</a></li>
+<li><a href="https://teakki.com/p/58a3ef1bf0d40775548c908f" target="_blank">Threejs 术语和概念</a></li>
+<li><a href="https://blog.csdn.net/qq_25909453/article/details/82598215" target="_blank">Threejs 源码解析 (Object3D)</a></li>
+<li><a href="https://juejin.im/post/5b8d47cce51d4538bf55e3a8" target="_blank">Threejs 实现3D粒子模型切换</a></li>
+<li><a href="https://segmentfault.com/a/1190000015330360" target="_blank">ThreeJS 中那些会让阴影失效的操作</a></li>
+<li><a href="http://www.hewebgl.com/article/articledir/1" target="_blank">WebGL 中文网</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide" data-transition="cover-circle"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Thank you</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide2',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<link rel="stylesheet" href="./css/index.css">
+
+<!--placeholder-->
+</body>
+</html>
