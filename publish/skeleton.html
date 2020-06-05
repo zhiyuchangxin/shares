@@ -1,0 +1,481 @@
+<!--
+    Powered By nodeppt - This is probably the best web presentation tool so far!
+    version: 1.4.5
+    site: https://github.com/ksky521/nodeppt
+    date: 2020-06-05
+-->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>骨骼动画——DragonBones - By zhiyuchangxin</title>
+    <link rel="stylesheet" media="all" href="./css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="./css/phone.css">
+    
+    <link rel="stylesheet" href="./js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+    
+<link rel="stylesheet" href="./css/theme.dark.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide fill" style="background-image: url('./img/bg23.png')"><section class="slide-wrapper"><hgroup>
+<h1>骨骼动画——DragonBones</h1>
+
+</hgroup><article>
+
+<img src="./img/dragonbones.png" class="index-img">
+<p style="color:#111;font-weight:600;">@织语长心&nbsp;&nbsp;2020-06-05</p>
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<h2>知识点</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>骨骼动画的原理<ul class="fadeIn">
+<li>骨骼动画的概念</li>
+<li>骨骼动画的组成</li>
+<li>骨骼动画的优缺点</li>
+</ul>
+</li>
+<li>CSS 实现骨骼动画</li>
+<li>DragonBones 实现骨骼动画<ul class="fadeIn">
+<li>DragonBones 简介</li>
+<li>选择 DragonBones 的原因</li>
+<li>H5 游戏引擎深度测评</li>
+<li>DragonBones 实现动画</li>
+</ul>
+</li>
+<li>骨骼动画的应用</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;骨骼动画原理</span></p>
+<h2>骨骼动画的概念</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>「骨骼动画」就是模拟<strong>骨骼运动</strong>机制而制作的动画</li>
+<li>「骨骼动画」不是一种动画制作形式，而是一种制作<strong>手段</strong><ul>
+<li>“帧动画”和“Tween动画”是动画制作形式</li>
+<li>“骨骼动画”是动画制作手段</li>
+</ul>
+</li>
+<li>「骨骼动画」是一种通过<strong>控制骨骼参数</strong>来实现多帧动画的方式
+<br>
+<br><blockquote>
+<p>1.当一些动画的构成和变形非常复杂时，尽管动画本质上是这些点在空间内做位移构成的，但直接驱动这些点非人力能为；
+2.因此我们把运动简化成骨骼来代表，并把点一一映射到骨骼上；</p>
+</blockquote>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;骨骼动画原理</span></p>
+<h2>骨骼的组装结构</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>骨骼是以<strong>树</strong>状结构组织起来
+<img src="http://img.alicdn.com/tps/TB17XvsKFXXXXXoXXXXXXXXXXXX-500-400.png" class="skeleton-tree"></li>
+<li>每片骨骼都需要描述自身的变换参数：<ul>
+<li>位移（x，y）</li>
+<li>旋转角度（θ）</li>
+<li>骨骼的位移和角度是「相对父骨骼坐标系」而非「全局」而言的</li>
+</ul>
+</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;骨骼动画原理</span></p>
+<h2>骨骼动画的元素</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>骨架（Armature）：骨骼的集合（骨架中至少包含一个骨骼）</li>
+<li>骨骼（Bone）：骨骼动画的基本组成部分<ul class="fadeIn">
+<li>骨骼之间存在父子关系，父亲的变换会影响到孩子</li>
+<li>一般通过骨骼的旋转、缩放、平移等变换即可形成动画</li>
+</ul>
+</li>
+<li>插槽（Slot）：图片的容器，是骨骼和图片的桥梁<ul class="fadeIn">
+<li>一根骨骼可以挂载多个插槽</li>
+<li>骨骼可被视作插槽的父节点，骨骼的变换会影响插槽</li>
+</ul>
+</li>
+<li>显示对象（DisplayData）：显示对象通常为图片<ul class="fadeIn">
+<li>一个插槽中可以有多个显示对象，但同时只会有一个被显示</li>
+<li>通过修改当前显示的对象可以形成帧动画</li>
+</ul>
+</li>
+<li>装配（Rigging）：构成骨骼的过程</li>
+<li>蒙皮（Skinning）：把点映射到骨骼上的过程</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;骨骼动画原理</span></p>
+<h2>骨骼动画的优缺点</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>优点<ul class="fadeIn">
+<li>区别于 GIF 的不连贯和序列帧的体积大，骨骼动画有较好的<strong>灵活性</strong>和<strong>流畅性</strong>，动画更加生动逼真</li>
+<li>图片资源占最<strong>小</strong>的存储空间，骨骼动画的图片容量可以减少90%</li>
+<li>动画切换<strong>自动补间</strong>，过渡更加灵动</li>
+<li><strong>骨骼可控</strong>（可对特定骨骼做特殊控制或监听骨骼事件帧...）</li>
+<li>动作数据继承，多角色可<strong>共用</strong>一套动画数据</li>
+</ul>
+</li>
+<li>缺点：比传统的逐帧动画要求<strong>更高的处理器性能</strong></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<h2>CSS 实现骨骼动画</h2>
+
+</hgroup><article>
+
+<p><a href="javascript:void(0);" target="_blank" style="">DEMO:祈福牌</a>
+<a href="javascript:void(0);" target="_blank" style="">DEMO:跑步</a></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<h2>DragonBones 实现骨骼动画</h2>
+
+</hgroup><article>
+
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 简介</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li><strong>2D</strong>骨骼动画解决方案</li>
+<li><strong>开源</strong>、<strong>跨平台</strong>、<strong>免费</strong></li>
+<li>打通游戏动画<strong>设计</strong>和<strong>开发</strong>工作流<ul>
+<li>方便了设计师在软件中的操作和编辑</li>
+<li>方便开发者使用这份数据来播放精灵动画</li>
+</ul>
+</li>
+<li>支持将动画数据<strong>导出为 JSON</strong>格式</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>选择 DragonBones 的原因</h2>
+
+</hgroup><article>
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>介绍</th>
+<th>导出格式</th>
+<th>收费情况</th>
+<th>其他</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DragonBones</td>
+<td>白鹭时代推出的2D骨骼动画解决方案</td>
+<td>支持JSON</td>
+<td>免费</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Spine</td>
+<td>针对游戏开发的2D骨骼动画编辑工具</td>
+<td>支持JSON</td>
+<td>收费</td>
+<td>-</td>
+</tr>
+<tr>
+<td>万彩骨骼大师</td>
+<td>专门制作2D动画人物/角色的软件</td>
+<td>不支持JSON</td>
+<td>免费</td>
+<td>限windows系统</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<ul class="moveIn">
+<li>免费的才是最受欢迎的（虽然据说 Spine 比 dragonBones 更强大）</li>
+<li>支持 JSON 格式提高动画的还原度（消除买家秀与卖家秀落差）</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><aside class="note">
+<section>
+<p>测评结果:</p>
+<ol>
+<li>Three.js 定位：JS 语言的 <strong>3D库</strong></li>
+<li>Pixi.js 定位：依赖于 canvas 的 WebGL <strong>2D渲染器</strong><ul>
+<li>把渲染性能做到极致，成为其他引擎的渲染内核</li>
+<li>API设计上更加参考非常成熟的2D渲染架构 —— Flash，并且提供的API也尽量参考了AS</li>
+</ul>
+</li>
+<li>Phaser 定位：桌面与移动端的 H5 游戏<strong>框架</strong><ul>
+<li>Phaser并没有自己的渲染内核，而是直接引用了 Pixi.js</li>
+</ul>
+</li>
+<li>Egret 定位：游戏解决方案</li>
+</ol>
+
+</section>
+</aside><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>H5 游戏引擎深度测评</h2>
+
+</hgroup><article>
+
+<img src="./img/h5-compare.png" class="h5-compare">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 使用</h2>
+
+</hgroup><article>
+
+<p><p style="text-align:left;">主要分为两大阶段：</p></p>
+<ul class="moveIn">
+<li>资源创作阶段：生成程序可以使用的 DragonBones 资源</li>
+<li>程序使用阶段：对骨骼动画库进行各种调用及组合，产生丰富而生动的游戏动作画面</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——JSON数据分析</h2>
+
+</hgroup><article>
+
+<p>了解导出JSON数据的内容：<a href="http://developer.egret.com/cn/github/egret-docs/DB/dbLibs/5foramt/index.html" target="_blank">数据格式说明</a></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——创建骨骼动画</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>载入数据</li>
+<li>解析数据：parseDragonBonesData、parseTextureAtlasData</li>
+<li>提取骨架系统：armatureDisplay = factory.buildArmatureDisplay(&#39;armatureName&#39;);</li>
+<li>播放动画：armatureDisplay.animation.play(&#39;animationName&#39;);</li>
+<li>将骨架添加到舞台：addChild(armatureDisplay);</li>
+</ul>
+<p class="moveIn"><span><a href="javascript:void(0);" target="_blank" style="">DEMO:傲娇公鸡</a> <span></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——创建骨骼动画code</h2>
+
+</hgroup><article>
+
+<img src="./img/skeleton-code1.png" class="h5-compare">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——多角色动画</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>DragonBones 系统允许创建多个骨骼动画</li>
+<li>可以创建多个 Factory 来管理不同的骨骼动画</li>
+<li>也可使用同一个 Factory 来管理多个骨骼动画</li>
+<li>当使用一个 Factory 时，需注意避免龙骨数据/骨架数据重名</li>
+<li>如没有特殊需求，建议使用一个 Factory 实例</li>
+</ul>
+<p class="moveIn"><span><a href="javascript:void(0);" target="_blank" style="">DEMO:2只傲娇公鸡</a> <span></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——多角色动画code</h2>
+
+</hgroup><article>
+
+<img src="./img/skeleton-code2.png" class="h5-compare">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——其他常用</h2>
+
+</hgroup><article>
+
+<ul class="moveIn">
+<li>控制骨骼运动：getBone() 获取骨骼后变换</li>
+<li>改变动画速度：timeScale</li>
+<li>动画混合：fadeIn<ul>
+<li>一个骨架同时可以播放多个动画（eg：角色同时播放跑步和开火的动画）</li>
+</ul>
+</li>
+<li>动画遮罩：addBoneMask<ul>
+<li>只将动画的一部分呈现出来（eg：只播放head和body两个骨头的动画，其他不动）</li>
+</ul>
+</li>
+</ul>
+<p><a href="javascript:void(0);" target="_blank" style="">DEMO:控制公鸡动画</a>
+<a href="javascript:void(0);" target="_blank" style="">DEMO:公鸡换装备</a></p>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——骨骼动画事件监听code</h2>
+
+</hgroup><article>
+
+<img src="./img/skeleton-code3.png" class="h5-compare">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——骨骼动画事件交互code</h2>
+
+</hgroup><article>
+
+<img src="./img/skeleton-code4.png" class="h5-compare">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>DragonBones 实现动画——骨骼动画换装code</h2>
+
+</hgroup><article>
+
+<img src="./img/skeleton-code5.png" class="h5-compare">
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg24.png')"><section class="slide-wrapper"><hgroup>
+<p><span class="theme-tag">&middot;DragonBones 实现骨骼动画</span></p>
+<h2>骨骼动画的应用</h2>
+
+</hgroup><article>
+
+<ul>
+<li>目前骨骼动画已经被大规模地使用在游戏和动画中，大有一种<strong>取代帧动画</strong>的趋势</li>
+<li>骨骼动画主要被用<strong>游戏场景</strong>中，做<strong>Logo</strong>、<strong>彩蛋</strong>也不错</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>参考文献</h2>
+
+</hgroup><article>
+
+<ul>
+<li><a href="https://blog.csdn.net/linuxheik/article/details/81838031" target="_blank">骨骼动画原理与前端实现浅谈</a></li>
+<li><a href="http://dragonbones.com/cn/index.html" target="_blank">DragonBones 官网</a></li>
+<li><a href="https://blog.csdn.net/weixin_33935777/article/details/93012239?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.nonecase&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-5.nonecase" target="_blank">2D骨骼动画工具DragonBones的使用教程</a></li>
+<li><a href="https://blog.csdn.net/zeping891103/article/details/72529122" target="_blank">前端动画渲染引擎pixi.js系列（10）骨骼动画实现之DragonBones</a></li>
+<li><a href="https://gameinstitute.qq.com/community/detail/111189" target="_blank">骨骼动画在H5使用攻略</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1069581" target="_blank">HTML5 游戏引擎深度测评</a></li>
+<li><a href="http://pixijs.com" target="_blank">Pixi.js 官网</a></li>
+<li><a href="https://blog.csdn.net/o83290102o5/category_9281258.html" target="_blank">Pixi.js源码分析</a></li>
+<li><a href="https://blog.mutoo.im/2015/02/understand-pixi-js-rendering/" target="_blank">浅析 Pixi.js 渲染流程</a></li>
+<li><a href="https://www.jianshu.com/p/2aac3971368a" target="_blank">Laya 动画系列三 骨骼动画</a></li>
+</ul>
+
+</article></section></slide>
+<slide class="slide fill" style="background-image: url('./img/bg23.png')" data-transition="cover-circle"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Thank you</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodeppt v1.4.5</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="./js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+    var ASSET_RELATIVE_DIR = ".";
+</script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+if (typeof ASSET_RELATIVE_DIR === 'string') {
+    path = path + '/' + ASSET_RELATIVE_DIR;
+}
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="./js/mixjs/lib/event/broadcast.js"></script>
+<script src="./js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide2',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<link rel="stylesheet" href="./css/skeleton.css">
+
+<!--placeholder-->
+</body>
+</html>

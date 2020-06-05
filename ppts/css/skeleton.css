@@ -1,0 +1,101 @@
+body {
+  font-family: cursive;
+}
+
+.slide.fill img {
+  left: auto;
+  top: auto;
+  min-width: auto;
+  min-height: auto;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.zy-ml30 {
+  margin-left: 400px;
+}
+
+.file-setting {
+  color: yellow;
+}
+
+#incallback, #outcallback {
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.btn-default {
+  background: #fff;
+  color: #000;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.btn.disabled {
+  color: #a9a9a9;
+}
+
+.slide-wrapper {
+  padding: 0 50px;
+  background: rgba(255, 255, 255, .1);
+  backdrop-filter: blur(20px);
+}
+
+.slide.fill img.lf:not(:first-child) {
+  margin: 20px 0;
+  display: inline-block;
+  width: 300px;
+  height: 200px;
+  z-index: 1;
+}
+
+.slide.fill img.lf:first-child {
+  margin: 20px 0;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  z-index: 1;
+}
+
+.slide.fill {
+  background-size: 100% 100%;
+}
+
+.slide.fill img.index-img {
+  display: block;
+  position: relative;
+  margin: -30px auto 30px;
+  width: 55%;
+  border: 0 none;
+}
+
+.slide.fill img.skeleton-tree {
+  position: relative;
+  width: 300px;
+  vertical-align: top;
+  z-index: 0;
+}
+
+.slide.fill img.h5-compare {
+  position: relative;
+  width: 580px;
+  z-index: 0;
+}
+
+
+.theme-tag {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  opacity: .5;
+  font-size: 34px;
+  font-family: serif;
+}
